@@ -1,0 +1,24 @@
+#include <stdio.h>
+#define max(x, y) (((x) > (y)) ? (x) : (y))
+int findPlatform(int arr[], int dep[], int n)
+{
+	int plat_needed = 1, result = 1;
+	for (int i = 0; i < n; i++) {
+		plat_needed = 1;
+		for (int j = 0; j < n; j++) {
+			if (i != j)
+				if (arr[i] >= arr[j] && dep[j] >= arr[i])
+					plat_needed++;
+		}
+		result = max(plat_needed, result);
+	}
+	return result;
+}
+int main()
+{
+	int arr[] = { 900, 940, 950 };
+	int dep[] = { 910,1200,1120 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	printf("minimum no.of platforms :%d", findPlatform(arr, dep, n));
+	return 0;
+}
